@@ -81,7 +81,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
         
-               
+        // Get url from params otherwise, serve default url
         let headers : HTTPHeaders = [.accept("*/*")]
         let url : URL =  URL(string: self.userDefaults.string(forKey: "url") ?? "https://twilight-viena-3znebkcm7hpn.vapor-farm-e1.com/ussd/start")!;
 
