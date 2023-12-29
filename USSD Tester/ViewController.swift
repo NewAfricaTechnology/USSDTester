@@ -46,6 +46,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textView.text = ""
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.restart), name:NSNotification.Name(rawValue: "restart"), object: nil)
+        
+        // Reset sessionId everytime app restarts
+        resetSessionId()
 
     }
     
@@ -83,8 +86,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // Get url from params otherwise, serve default url
         let headers : HTTPHeaders = [.accept("*/*")]
-        let url : URL =  URL(string: self.userDefaults.string(forKey: "url") ?? "https://twilight-viena-3znebkcm7hpn.vapor-farm-e1.com/ussd/start")!;
-
+        let url : URL = self.userDefaults.url(forKey: "url") ?? URL(string: "https://twilight-viena-3znebkcm7hpn.vapor-farm-e1.com/ussd/start")!;
+        
         
         // Start the request
         session.request(url, method: .post, parameters: params, headers: headers).responseData { [self] response in
